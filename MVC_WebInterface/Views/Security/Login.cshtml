@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="~/Img/Icons/icon-48x48.png" />
+
+    <title>Login</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="main">
+        <div class="content">
+            <center>
+                <div class="container login-container">
+
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div id="login_warning_div" class="alert alert-danger" role="alert">
+                            @ViewBag.Message
+                        </div>
+                    }
+
+                    <div class="row justify-content-center align-items-center">
+
+                        <div class="login-form-2 w-50 mt-3" style="text-align:center;">
+                            <img src="~/img/erisim.png" class="mt-1 mb-1" style="width:500px;">
+                            <h3 class="font-weight-bold mt-4">Lütfen Kullanıcı Adınızı ve<br /> Şifrenizi Giriniz</h3>
+
+                            <form action="/Security/Login" method="post">
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="UserName" placeholder="Kullanıcı Adı" value="1" />
+                                </div>
+                                <div class="form-group mt-1">
+                                    <input type="password" class="form-control" name="Password" placeholder="Şifre" value="12345" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success w-75 ml-2 mt-3 font-weight-bold" style="font-size:19px;" value="Giriş" />
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </center>
+        </div>
+    </div>
+
+</body>
+</html>

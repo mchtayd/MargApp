@@ -1,0 +1,9 @@
+﻿global using Entity.Abstract;
+global using Entity.Concrete;
+global using DataAccess.Database;
+global using DataAccess.Concrete;
+global using DataAccess.Abstract;
+global using DataAccess.Shared;
+global using DataAccess.Options;
+global using System.Data;
+global using System.Data.SqlClient;

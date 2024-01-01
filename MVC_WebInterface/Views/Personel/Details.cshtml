@@ -1,0 +1,45 @@
+﻿@model MVC_WebInterface.Models.DTO.PersonelDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<h4>CompanyUserDTO</h4>
+<hr />
+<center>
+    <table class="table table-striped font-weight-bold fs-14 bg-beige tab-table">
+        <tbody>
+            <tr>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.Id)</td>
+                <td>@Model.Id</td>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.PersonelAdSoyad)</td>
+                <td>@Model.PersonelAdSoyad</td>
+            </tr>
+              <tr>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.Tc)</td>
+                <td>@Model.Tc</td>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.IkametAdresi)</td>
+                <td>@Model.IkametAdresi</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.Telefon)</td>
+                <td>@Model.Telefon</td>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.MezuniyetBilgisi)</td>
+                <td>@Model.MezuniyetBilgisi</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.DogumYeri)</td>
+                <td>@Model.DogumYeri</td>
+                <td class="fw-bold">@Html.DisplayNameFor(model=>model.DogumTarihi)</td>
+                <td>@Model.DogumTarihi</td>
+            </tr>
+          
+        </tbody>
+    </table>
+</center>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Güncelle</a> |
+    <a asp-action="Index">Ana Listeye Dön</a>
+</div>

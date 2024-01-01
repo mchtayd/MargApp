@@ -1,0 +1,201 @@
+﻿@model MVC_WebInterface.Models.Personel.IndexModel
+
+@{
+    ViewData["Title"] = "Kullanıcılar";
+}
+@section FullScreen{
+}
+
+@section Styles{
+<link rel="stylesheet" href="~/css/datatable_bootstrap4.css">
+}
+
+<!-- Personnel Delete Modal -->
+<div class="modal fade" id="personnel-delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Personel Silme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Delete" asp-controller="Personel" data-ajax="true" data-ajax-method="POST" data-ajax-loading="#spinner" data-ajax-update="#process-result">
+                <input id="inp-personnel-id" name="sicilNo" type="hidden" value="" />
+                <input id="inp-personnel-fullname" name="adSoyad" type="hidden" value="" />
+                <div class="modal-body">
+                    <div class="row text-center">
+                        <div>
+                            <label class="me-3"><b><span id="span-personnel"></span> </b> Personeli Silinecektir. Onaylıyor Musunuz ?</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" value="İptal" />
+                    <input type="submit" class="btn btn-outline-danger btn-send" value="Sil" />
+                </div>
+            </form>
+            <div class="row">
+                <span id="spinner" style="display:none;"> - Personel Siliniyor .. -</span>
+                <div id="process-result" class="col-md-12 mb-2">  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="ms-3 mt-2">Kullanıcı Listesi</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert @(ViewBag.Message.Contains("Hata")?"alert-warning":"alert-success") m-3 fs-14" style="min-width:30rem;">
+        @ViewBag.Message
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary mt-2 ms-3">Yeni Kayıt</a>
+</p>
+
+<div class="row">
+    <div class="offset-md-1 col-md-10">
+
+
+        <table class="table table-striped table-hover font-weight-bold fs-13 tab-datatable">
+            <thead>
+                <tr class="dropdown">
+                    <td class="first"></td>
+                    <td class="a1"></td>
+                    <td class="b1"></td>
+                    <td class="c1"></td>
+                    <td class="d1"></td>
+                    <td class="e1"></td>
+                </tr>
+                <tr>
+                    <th class="first">Sicil No</th>
+                    <th class="a1"> Ad Soyad </th>
+                    <th class="b1">Telefon No</th>
+                    <th class="c1">Doğum Tarihi</th>
+                    <th class="d1">Doğum Yeri</th>
+                    <th class="e1 text-center">İşlemler</th>
+                </tr>
+            </thead>
+            <tfoot style="display:table-header-group">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model.Personels)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonelAdSoyad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefon)
+                        </td>
+                        <td>
+                            @item.DogumTarihi.ToShortDateString()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DogumYeri)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-sicilNo="@item.Id" class="ms-5 btn btn-outline-success" onclick="return valueControl(@item.Id)">Güncelle</a>
+                            <a asp-action="Details" asp-route-sicilNo="@item.Id" class="ms-3 btn btn-outline-primary" onclick="return valueControl(@item.Id)">Detaylar</a>
+                            <input type="button" class="btn-delete-personnel ms-3 btn btn-outline-danger"
+                               data-id="@item.Id"
+                               data-fullname="@item.PersonelAdSoyad"
+                               data-val="@item.Id - @item.PersonelAdSoyad"
+                               value="Sil" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts{
+
+<script src="~/js/datatable_jquery.js"></script>
+<script src="~/js/datatable_bootstrap4.js"></script>
+
+<script type="text/javascript">
+
+    $('.btn-delete-personnel').click(function(){
+        alert('clicked')
+        var info=$(this).data('val');
+        info=$.trim(info);
+
+        if (!info) {
+            alertToast("Lütfen Seçtiğiniz Sicil Numarasını Kontrol Ediniz");
+            $('#personnel-delete-modal').modal('hide');
+            return;
+        }
+        $('#inp-personnel-id').val($(this).data('id'));
+        $('#inp-personnel-fullname').val($(this).data('fullname'));
+        $('#span-personnel').text(info);
+        $('#personnel-delete-modal').modal('show')
+    });
+
+
+     $('.tab-datatable').DataTable({
+        "pagingType": "full_numbers",
+        "responsive": true,
+        "lengthChange": true,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Hepsi"]],
+        "dom": 'Blfrtip',
+        "searching": true,
+        "language": {
+            "emptyTable": "Tabloda herhangi bir veri mevcut değil",
+            "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+            "infoEmpty": "Kayıt yok",
+            "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+            "infoThousands": ".",
+            "lengthMenu": "Sayfada _MENU_ kayıt göster",
+            "loadingRecords": "Yükleniyor...",
+            "processing": "İşleniyor...",
+            "search": "Ara:",
+            "zeroRecords": "Eşleşen kayıt bulunamadı",
+            "paginate": {
+                "first": "İlk",
+                "last": "Son",
+                "next": "Sonraki",
+                "previous": "Önceki"
+            }
+        },
+        "order": [],
+
+        initComplete: function () { // After DataTable initialized
+            this.api().columns([0, 1, 2, 3, 4, 5, 6, 7])
+                .every(function () {
+                    /* use of [1,2,3] for second, third and fourth column.  Leave blank - columns() - for all.
+                    Multiples? Use columns[0,1]) for first and second, e.g. */
+                    var column = this;
+                    var select = $('<select><option value=""/></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                }); // this.api function
+        } //initComplete function
+    }); // .DataTable function
+
+
+</script>
+}

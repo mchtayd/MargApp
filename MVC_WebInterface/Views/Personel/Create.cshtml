@@ -1,0 +1,161 @@
+﻿@model MVC_WebInterface.Models.DTO.PersonelDTO
+
+@{
+    ViewData["Title"] = "Yeni Kullanıcı";
+}
+
+<h1 class="mt-2">Yeni Kullanıcı</h1>
+
+<hr />
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success m-3 fs-14" style="min-width:30rem;">
+        @ViewBag.Message
+    </div>
+}
+
+<!-- Upload Multi User Modal -->
+<div class="modal fade" id="upload-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kaynak Dosya Yükleme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="UploadExcelForUsers" asp-controller="Personel" data-ajax="true" data-ajax-method="POST" enctype="multipart/form-data"
+                  data-ajax-loading="#spinner" data-ajax-update="#upload-result" data-ajax-complete="clearFileInput()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div>
+                            <label class="me-3"><b>Dosyaları Seç : </b></label>
+                            <input class="col-md-9 btn btn-primary" type="file" id="file" name="files" placeholder="" multiple />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <span id="spinner" style="display:none;"> <img src="/img/loading.gif" class="loading-gif" /> </span>
+                        <div id="upload-result" class="col-md-12 mt-1">  </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- jquery ile istek gönder. Success dönünde mesaj yazdır -->
+                    <a href="/User/DownloadTemplateToAddUser?fileName=LdapUserTemplate" class="btn btn-outline-primary me-auto">Şablonu İndir</a>
+                    <input type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" value="İptal" />
+                    <input type="submit" class="btn btn-outline-primary" value="Karşıya Yükle" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*<input type="button" class="btn btn-outline-success ms-3" data-bs-toggle="modal" data-bs-target="#upload-modal" value="Excel İle Yükle" />
+
+    <div class="m-1"> <b> Extension veya Masa Numarasını -1 Seçerek Sadece Active Directory İçin İşlem Yapılmasını Sağlayabilirsiniz </b> </div>*@
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Create" asp-controller="Personel" method="post" class="ms-5">
+    <div class="form-group row">
+        <label asp-for="Id" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="Id" class="form-control" autocomplete="nope" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+
+        <label asp-for="PersonelAdSoyad" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="PersonelAdSoyad" class="form-control" autocomplete="nope" />
+            <span asp-validation-for="PersonelAdSoyad" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="Tc" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="Tc" class="form-control" autocomplete="nope" />
+            <span asp-validation-for="Tc" class="text-danger"></span>
+        </div>
+
+        <label asp-for="IkametAdresi" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <textarea id="text-ikamet" name="IkametAdresi" class="form-control" autocomplete="nope">
+
+            </textarea>
+            <span asp-validation-for="IkametAdresi" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="Telefon" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="Telefon" class="form-control" autocomplete="nope" />
+            <span asp-validation-for="Telefon" class="text-danger"></span>
+        </div>
+
+        <label asp-for="MezuniyetBilgisi" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <select asp-for="MezuniyetBilgisi" asp-items="Html.GetEnumSelectList<Mezuniyet>()" class="form-control">
+                <option selected="selected" value="-1">Seçiniz..</option>
+            </select>
+            <span asp-validation-for="MezuniyetBilgisi" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="DogumYeri" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="DogumYeri" class="form-control" autocomplete="nope" />
+            <span asp-validation-for="DogumYeri" class="text-danger"></span>
+        </div>
+        <label asp-for="DogumTarihi" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="DogumTarihi" class="form-control" autocomplete="nope" />
+            <span asp-validation-for="DogumTarihi" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="Password" class="control-label col-md-2 text-right"></label>
+        <div class="col-md-3">
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        @* <label asp-for="OrganizationalUnit" class="control-label col-md-2 text-right"></label>
+            <div class="col-md-3">
+            <select id="SelectOU"
+            asp-for="OrganizationalUnit"
+            class="form-control"
+            asp-items="Html.GetEnumSelectList<OrganizationalUnit>()">
+            <option selected>Grup Seçiniz ..</option>
+
+            </select>
+            <span asp-validation-for="OrganizationalUnit" class="text-danger"></span>
+            </div>*@
+    </div>
+
+    <div class="row form-group mt-4">
+        <input type="submit" value="Kaydet" class="offset-md-3 col-md-3 btn btn-outline-primary" />
+    </div>
+</form>
+
+
+<div class="mt-3">
+    @*<a asp-action="Index" class="btn btn-primary">Ana Listeye Dön</a>*@
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+<script type="text/javascript">
+
+    $('option[value=0]').css("display", "none");
+
+      $(document).ready(function () {
+          $('#text-ikamet').text("");
+      });
+
+</script>
+}
