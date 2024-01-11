@@ -9,6 +9,7 @@ namespace DataAccess.Abstract
 {
     public class SqlServices
     {
+
         readonly string conString = "Data Source=.; Database=MargDatabase; Integrated Security=True";
         SqlConnection connection;
 
@@ -112,5 +113,5 @@ namespace DataAccess.Abstract
         }
 
     }
-    
+
 }

@@ -67,7 +67,7 @@ namespace DataAccess.Concrete
             Login login = null;
             try
             {
-                sqlDataProcess = await sqlService.StoreReaderAsync("LOGINLER_GetSingle", new SqlParameter("@sicil", sicil), new SqlParameter("@sifre", sifre));
+                sqlDataProcess = await sqlService.StoreReaderAsync("LOGIN_GetSingle", new SqlParameter("@sicil", sicil), new SqlParameter("@sifre", sifre));
                 dataReader = sqlDataProcess.SqlDataReader;
                 while (dataReader.Read())
                 {

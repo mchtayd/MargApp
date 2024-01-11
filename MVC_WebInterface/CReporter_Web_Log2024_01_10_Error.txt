@@ -1,0 +1,30 @@
+
+01/10/2024 12:51:08 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)
+
+01/10/2024 16:26:16 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGINLER_GetSingle'.
+
+01/10/2024 17:16:00 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGINLER_GetSingle'.
+
+01/10/2024 17:18:37 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:23:43 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:25:46 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:29:36 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:34:51 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:38:02 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:39:35 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)
+
+01/10/2024 17:40:36 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)
+
+01/10/2024 17:42:08 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: Could not find stored procedure 'LOGIN_GetSingle'.
+
+01/10/2024 17:43:28 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)
+
+01/10/2024 17:47:29 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)
+
+01/10/2024 17:59:41 - Method Name : (LoginAsync) Sicil: 1 /  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)

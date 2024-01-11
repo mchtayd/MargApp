@@ -28,6 +28,7 @@ namespace MVC_WebInterface.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Login(User user)
         {
             Login login = await loginManager.LoginAsync(user.UserName, user.Password);

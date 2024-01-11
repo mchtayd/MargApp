@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+  depomargapp:
+
+services:
+  margappdb:
+      container_name: app-db
+      image: mcr.microsoft.com/mssql/server:2022-latest
+      ports:
+        - 8002:1433
+      environment:
+        - ACCEPT_EULA=Y
+        - MSSQL_SA_PASSWORD=password@12345#
+      networks:
+        - depomargapp
+  mvc_webinterface:
+    container_name: demo-marg-app
+    image: mvc
+    build:
+      context: .
+      dockerfile: MVC_WebInterface/Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - margappdb
+    environment:
+      - DB_HOST=margappdb
+      - DB_NAME=MargAppDB
+      - DB_SA_PASSWORD=password@12345#
+    networks:
+      - depomargapp
