@@ -16,7 +16,7 @@ services:
         - depomargapp
   mvc_webinterface:
     container_name: demo-marg-app
-    image: mvc
+    image: mchtayd/mvc
     build:
       context: .
       dockerfile: MVC_WebInterface/Dockerfile
