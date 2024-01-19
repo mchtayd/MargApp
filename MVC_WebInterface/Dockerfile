@@ -13,6 +13,7 @@ COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
 COPY ["Entity/Entity.csproj", "Entity/"]
 RUN dotnet restore "MVC_WebInterface/MVC_WebInterface.csproj"
 
+
 COPY . .
 WORKDIR "/src/MVC_WebInterface"
 RUN dotnet build "MVC_WebInterface.csproj" -c Release -o /app/build
