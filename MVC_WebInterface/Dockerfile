@@ -11,9 +11,7 @@ COPY ["Business/Business.csproj", "Business/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
 
 COPY ["Entity/Entity.csproj", "Entity/"]
-
 RUN dotnet restore "MVC_WebInterface/MVC_WebInterface.csproj"
-
 
 COPY . .
 WORKDIR "/src/MVC_WebInterface"
