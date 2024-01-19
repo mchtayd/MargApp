@@ -24,7 +24,6 @@ RUN dotnet publish "MVC_WebInterface.csproj" -c Release -o /app/publish /p:UseAp
 FROM base AS final
 
 
-
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "MVC_WebInterface.dll"]
