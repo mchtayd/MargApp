@@ -16,6 +16,7 @@ namespace Business.Concrete
         }
 
         public async Task<Login> AddAsync(string sessionSicilNo, Login entity) => await loginDal.AddAsync(sessionSicilNo, entity);
+
         public async Task<Login> LoginAsync(string sicil, string sifre) => await loginDal.LoginAsync(sicil, sifre);
         public async Task<bool> DeleteAsync(string sessionSicilNo, int id) => await loginDal.DeleteAsync(sessionSicilNo, id);
         public async Task<Login> UpdateAsync(string sessionSicilNo, Login entity) => await loginDal.UpdateAsync(sessionSicilNo, entity);
